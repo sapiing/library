@@ -17,4 +17,10 @@ class Petugas extends Model
   {
     return $this->hasMany(Peminjaman::class, 'id_petugas');
   }
+
+  // app/Models/Petugas.php
+  public function user()
+  {
+    return $this->hasOne(User::class, 'id_petugas');
+  }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Petugas;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,29 +15,41 @@ class AuthController extends Controller
 {
   public function register()
   {
-    return view("auth/register");
+    $user = User::orderBy('created_at', 'DESC')->get();
+    $totalUser = User::count();
+    return view("pages.user.index", compact('user', 'totalUser'));
+  }
+
+  public function create(Request $request) {
+    $petugas = Petugas::all();
+    return view('pages.user.create', compact('petugas'));
+  }
+
+  public function show(string $id) {
+    $user = User::findOrFail($id);
+    return view('pages.user.show', compact('user'));
   }
 
   public function registerSave(Request $request)
   {
     Validator::make($request->all(), [
-      'name' => 'required',
       'email' => 'required|email',
       'password' => 'required',
+      'id_petugas' => 'required',
     ])->validate();
 
     User::create([
-      'name' => $request->name,
+      'id_petugas' => $request->id_petugas,
       'email' => $request->email,
       'password' => ($request->password),
     ]);
 
-    return redirect()->route('login');
+    return redirect()->route('user');
   }
 
   public function login()
   {
-    return view('auth/login');
+    return view('pages.user.index');
   }
 
   public function loginAction(Request $request)
@@ -65,4 +78,6 @@ class AuthController extends Controller
 
     return redirect('/');
   }
+
+
 }

@@ -1,4 +1,4 @@
-@php
+{{-- @php
     $customizerHidden = 'customizer-hide';
 @endphp
 
@@ -113,7 +113,7 @@
                             <hr>
                         </form> --}}
 
-                        <p class="text-center">
+{{-- <p class="text-center">
                             <span>Already have an account?</span>
                             <a href="{{ route('login') }}">
                                 <span>Sign in instead</span>
@@ -125,4 +125,94 @@
             </div>
         </div>
     </div>
+@endsection --}}
+
+
+@extends('layouts/layoutMaster')
+
+@section('title', 'eCommerce Product Add - Apps')
+
+@section('vendor-style')
+    @vite(['resources/assets/vendor/libs/quill/typography.scss', 'resources/assets/vendor/libs/quill/katex.scss', 'resources/assets/vendor/libs/quill/editor.scss', 'resources/assets/vendor/libs/select2/select2.scss', 'resources/assets/vendor/libs/dropzone/dropzone.scss', 'resources/assets/vendor/libs/flatpickr/flatpickr.scss', 'resources/assets/vendor/libs/tagify/tagify.scss'])
+@endsection
+
+@section('vendor-script')
+    @vite(['resources/assets/vendor/libs/quill/katex.js', 'resources/assets/vendor/libs/quill/quill.js', 'resources/assets/vendor/libs/select2/select2.js', 'resources/assets/vendor/libs/dropzone/dropzone.js', 'resources/assets/vendor/libs/jquery-repeater/jquery-repeater.js', 'resources/assets/vendor/libs/flatpickr/flatpickr.js', 'resources/assets/vendor/libs/tagify/tagify.js'])
+@endsection
+
+@section('page-script')
+    @vite(['resources/assets/js/app-ecommerce-product-add.js'])
+@endsection
+
+@section('content')
+    <h4 class="py-3 mb-0">
+        <span class="text-muted fw-light"><a href="{{ route('user') }}">User /</a></span><span class="fw-medium"> Tambah
+            user</span>
+    </h4>
+
+    <div class="app-ecommerce">
+        <form action="{{ route('user.save') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+
+            <!-- Add Product -->
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
+
+                <div class="d-flex flex-column justify-content-center">
+                    <h4 class="mb-1 mt-3">Menambah User</h4>
+                    <p class="text-muted">Klik Tambah Untuk Menambah User</p>
+                </div>
+                <div class="d-flex align-content-center flex-wrap gap-3">
+                    <button type="submit" class="btn btn-primary">Tambah</button>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+
+                <!-- First column-->
+
+                <div class="col-12 col-lg-12">
+                    <!-- Product Information -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="card-tile mb-0">Informasi User</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <div class="col">
+                                    <label class="form-label" for="petugas">Nama Petugas</label>
+                                    <select class="select2 form-select" id="petugas" name="id_petugas"
+                                        data-allow-clear="true">
+                                        @foreach ($petugas as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="text" class="form-control" id="email" name="email"
+                                    placeholder="Enter your email">
+                            </div>
+                            <div class="mb-3 form-password-toggle">
+                                <label class="form-label" for="password">Password</label>
+                                <div class="input-group input-group-merge">
+                                    <input type="password" id="password" class="form-control" name="password"
+                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                        aria-describedby="password" />
+                                    <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Second column -->
+
+                <!-- Second column -->
+                <!-- /Second column -->
+            </div>
+        </form>
+    </div>
+
 @endsection

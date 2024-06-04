@@ -11,6 +11,7 @@ use App\Http\Controllers\pages\MiscError;
 use App\Http\Controllers\authentications\LoginBasic;
 use App\Http\Controllers\authentications\RegisterBasic;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PetugasController;
@@ -33,18 +34,24 @@ Route::get('/', function () {
 
 
 Route::controller(AuthController::class)->group(function () {
-  Route::get('register', 'register')->name('register');
-  Route::post('register', 'registerSave')->name('register.save');
 
   Route::get('login', 'login')->name('login');
   Route::post('login', 'loginAction')->name('login.action');
 
-  Route::get('logout', 'logout')->middleware('auth')->name('logout');
+  Route::post('logout', 'logout')->middleware('auth')->name('logout');
 });
 
 Route::group(['middleware' => 'auth'], function () {
-  Route::get('/', fn () => redirect()->route('dashboard'));
-  Route::get('/dashboard', fn () => view('dashboard'))->name('dashboard');
+  Route::controller(DashboardController::class)->prefix('dashboard')->group(function () {
+    Route::get('/', 'index')->name('dashboard');
+  });
+
+  Route::controller(AuthController::class)->prefix('user')->group(function () {
+    Route::get('/', 'register')->name('user');
+    Route::get('create', 'create')->name('user.create');
+    Route::post('user', 'registerSave')->name('user.save');
+    Route::get('show{id}', 'show')->name('user.show');
+  });
 
 
   Route::controller(BukuController::class)->prefix('buku')->group(function () {
