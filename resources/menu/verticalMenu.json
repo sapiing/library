@@ -1,0 +1,59 @@
+{
+  "menu": [
+    {
+      "url": "dashboard",
+      "name": "Dashboards",
+      "icon": "menu-icon tf-icons ti ti-smart-home",
+      "slug": "dashboard",
+      "badge": [
+        "primary",
+        "5"
+      ]
+    },
+    {
+      "menuHeader": "Input"
+    },
+    {
+      "url": "anggota",
+      "name": "Anggota",
+      "slug": "anggota",
+      "icon": "menu-icon tf-icons ti ti-users"
+    },
+    {
+      "url": "petugas",
+      "name": "Petugas",
+      "icon": "menu-icon tf-icons ti ti-user-shield",
+      "slug": "petugas"
+    },
+    {
+      "url": "buku",
+      "icon": "menu-icon tf-icons ti ti-books",
+      "name": "Buku",
+      "slug": "buku"
+    },
+    {
+      "menuHeader": "Proses"
+    },
+    {
+      "url": "peminjaman",
+      "icon": "menu-icon tf-icons ti ti-transition-right",
+      "name": "Peminjaman",
+      "slug": "peminjaman"
+    },
+    {
+      "url": "pengembalian",
+      "name": "Pengembalian",
+      "icon": "menu-icon tf-icons ti ti-transition-left",
+      "slug": "pengembalian"
+    },
+    {
+      "menuHeader": "Laporan"
+    },
+    {
+      "url": "laporan",
+      "icon": "menu-icon tf-icons ti ti-checklist",
+      "name": "Laporan",
+      "slug": "Laporan"
+    }
+  ]
+}
